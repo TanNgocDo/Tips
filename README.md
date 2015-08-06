@@ -16,5 +16,5 @@ Completed:
 
 Video Walkthrough
 
-https://cloud.githubusercontent.com/assets/8816061/9114931/9de22592-3c86-11e5-883f-67665b692ede.gif
+![alt tag]https://cloud.githubusercontent.com/assets/8816061/9114931/9de22592-3c86-11e5-883f-67665b692ede.gif
 GIF created with LiceCap.
