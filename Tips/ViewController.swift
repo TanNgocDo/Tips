@@ -18,20 +18,24 @@ class ViewController: UIViewController {
     @IBOutlet weak var lbTotal: UILabel!
     
     @IBOutlet weak var tipControl: UISegmentedControl!
+    
+    var numberFormatter : NSNumberFormatter!
     var tipSetting : TipSetting!
+    var tip : Double = 0.0
+    var total: Double = 0.0
     
     
     func getStoredPercentTip() {
         tipSetting = TipSetting()
         var defaults = NSUserDefaults.standardUserDefaults()
-      
+        
         var tipOne = defaults.integerForKey("tip_one")
         var tipTwo = defaults.integerForKey("tip_two")
         var tipThree = defaults.integerForKey("tip_three")
         if( tipOne==0 && tipTwo==0 && tipThree==0 ) {
-        tipSetting.tipOne = 18
-        tipSetting.tipTwo = 20
-        tipSetting.tipThree = 25
+            tipSetting.tipOne = 18
+            tipSetting.tipTwo = 20
+            tipSetting.tipThree = 25
         }
         else{
             tipSetting.tipOne = tipOne
@@ -42,7 +46,7 @@ class ViewController: UIViewController {
     
     func savePercentTip(){
         var defaults = NSUserDefaults.standardUserDefaults()
-       
+        
         defaults.setInteger(tipSetting.tipOne, forKey: "tip_one")
         defaults.setInteger(tipSetting.tipTwo, forKey: "tip_two")
         defaults.setInteger(tipSetting.tipThree, forKey: "tip_three")
@@ -57,22 +61,50 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        lbTip.text = "$0.00"
-        lbTotal.text = "$0.00"
-        //tipSetting = TipSetting()
+//        NSNotificationCenter.defaultCenter().addObserver(self, selector: "applicationWillEnterForeground:", name: UIApplicationWillEnterForegroundNotification, object: nil)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "localeChanged:",
+            name: NSCurrentLocaleDidChangeNotification, object: nil)
+        
+        numberFormatter = NSNumberFormatter()
+        numberFormatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
+        numberFormatter.locale = NSLocale.autoupdatingCurrentLocale()
+        
         self.getStoredPercentTip()
-       // self.initTipControl()
+        
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
+    func applicationWillEnterForeground(notification: NSNotification) {
+       
+       
+    }
+    
+    func localeChanged(note: NSNotification!) {
+        numberFormatter.locale = NSLocale.autoupdatingCurrentLocale()
+        lbTip.text = numberFormatter.stringFromNumber(tip)
+        lbTotal.text = numberFormatter.stringFromNumber(total)
+    }
+    
+    
+    
+    override func viewWillAppear(animated: Bool) {
+       
+        lbTip.text = numberFormatter.stringFromNumber(tip)
+        lbTotal.text = numberFormatter.stringFromNumber(total)
+        self.initTipControl()
+       
         
         
     }
     
-    override func viewWillAppear(animated: Bool) {
-        self.initTipControl()
-      
-    }
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         self.savePercentTip()
+       
     }
     
     override func didReceiveMemoryWarning() {
@@ -98,12 +130,11 @@ class ViewController: UIViewController {
         var curTipPercent = tipPercent[tipControl.selectedSegmentIndex]
         
         var billAmount = ( txtBill.text as NSString ).doubleValue
-        var tip = billAmount*curTipPercent
-        var total = billAmount + tip
-        lbTip.text = "$\(tip)"
-        lbTotal.text = "$\(total)"
-        lbTip.text = String(format: "$%.2f", tip)
-        lbTotal.text = String(format: "$%.2f", total)
+        tip = billAmount*curTipPercent
+        total = billAmount + tip
+        lbTip.text = numberFormatter.stringFromNumber(tip)
+        lbTotal.text = numberFormatter.stringFromNumber(total)
+        
         
     }
     
@@ -120,7 +151,7 @@ class ViewController: UIViewController {
     
     @IBAction func showSetting(sender: AnyObject) {
         
-       
+        
         self.performSegueWithIdentifier("goSetting", sender: tipSetting )
         
     }
