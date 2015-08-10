@@ -19,6 +19,7 @@ class SettingViewController: UIViewController,UITextFieldDelegate {
     
     @IBOutlet weak var txtTipThree: UITextField!
     
+    @IBOutlet weak var swBackground: UISwitch!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +31,9 @@ class SettingViewController: UIViewController,UITextFieldDelegate {
         txtTipOne.text = String(tipSetting.tipOne)
         txtTipTwo.text = String(tipSetting.tipTwo)
         txtTipThree.text = String(tipSetting.tipThree)
+        
+        swBackground.on = tipSetting.hasBackground
+        
         
           }
     
@@ -97,6 +101,8 @@ class SettingViewController: UIViewController,UITextFieldDelegate {
         if( !txtTipThree.text.isEmpty ) {
             tipSetting.tipThree = txtTipThree.text.toInt()
         }
+        
+        tipSetting.hasBackground = swBackground.on
         
     }
     

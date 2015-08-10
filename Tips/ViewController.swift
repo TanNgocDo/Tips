@@ -32,6 +32,7 @@ class ViewController: UIViewController {
         var tipOne = defaults.integerForKey("tip_one")
         var tipTwo = defaults.integerForKey("tip_two")
         var tipThree = defaults.integerForKey("tip_three")
+        var hasBackground = defaults.boolForKey("has_background")
         if( tipOne==0 && tipTwo==0 && tipThree==0 ) {
             tipSetting.tipOne = 18
             tipSetting.tipTwo = 20
@@ -42,6 +43,7 @@ class ViewController: UIViewController {
             tipSetting.tipTwo = tipTwo
             tipSetting.tipThree = tipThree
         }
+        tipSetting.hasBackground = hasBackground
     }
     
     func savePercentTip(){
@@ -50,6 +52,7 @@ class ViewController: UIViewController {
         defaults.setInteger(tipSetting.tipOne, forKey: "tip_one")
         defaults.setInteger(tipSetting.tipTwo, forKey: "tip_two")
         defaults.setInteger(tipSetting.tipThree, forKey: "tip_three")
+        defaults.setBool( tipSetting.hasBackground, forKey: "has_background" )
         defaults.synchronize()
     }
     
@@ -65,6 +68,8 @@ class ViewController: UIViewController {
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "localeChanged:",
             name: NSCurrentLocaleDidChangeNotification, object: nil)
+        
+        
         
         numberFormatter = NSNumberFormatter()
         numberFormatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
@@ -83,6 +88,8 @@ class ViewController: UIViewController {
        
     }
     
+
+    
     func localeChanged(note: NSNotification!) {
         numberFormatter.locale = NSLocale.autoupdatingCurrentLocale()
         lbTip.text = numberFormatter.stringFromNumber(tip)
@@ -97,6 +104,14 @@ class ViewController: UIViewController {
         lbTotal.text = numberFormatter.stringFromNumber(total)
         self.initTipControl()
         self.updateCalculation()
+        txtBill.becomeFirstResponder()
+        if( tipSetting.hasBackground ) {
+            self.view.backgroundColor = UIColor.greenColor()
+        }
+        else {
+            self.view.backgroundColor = UIColor.whiteColor()
+            
+        }
        
         
         

@@ -170,11 +170,23 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Background" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Rvl-tO-8Lb">
+                                <rect key="frame" x="26" y="442" width="105" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="hjd-1g-7WC">
+                                <rect key="frame" x="165" y="442" width="51" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </switch>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="2FC-ch-ie2"/>
                     <connections>
+                        <outlet property="swBackground" destination="hjd-1g-7WC" id="6rL-rh-a3R"/>
                         <outlet property="txtTipOne" destination="Kke-ft-nXh" id="KCh-iq-2Ki"/>
                         <outlet property="txtTipThree" destination="bHW-ir-tjf" id="Ymo-uq-OVH"/>
                         <outlet property="txtTipTwo" destination="nLc-98-LAo" id="s6z-RQ-XiN"/>
@@ -201,6 +213,19 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0p3-da-K56" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="57" y="260"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="0ao-wm-XjC">
+            <objects>
+                <viewController id="OrB-3e-Jy0" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="a50-id-Xid">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UWs-J2-kom" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

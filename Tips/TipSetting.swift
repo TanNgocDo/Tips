@@ -12,4 +12,5 @@ class TipSetting: NSObject{
     var tipOne: Int!
     var tipTwo: Int!
     var tipThree: Int!
+    var hasBackground = false
 }
