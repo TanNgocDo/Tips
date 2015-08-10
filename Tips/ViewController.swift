@@ -96,6 +96,7 @@ class ViewController: UIViewController {
         lbTip.text = numberFormatter.stringFromNumber(tip)
         lbTotal.text = numberFormatter.stringFromNumber(total)
         self.initTipControl()
+        self.updateCalculation()
        
         
         
@@ -123,6 +124,11 @@ class ViewController: UIViewController {
     
     @IBAction func onEdittingChanged(sender: AnyObject) {
         
+        self.updateCalculation()
+        
+    }
+    
+    func updateCalculation() {
         var tipPercentOne = Double(tipSetting.tipOne)/100.0
         var tipPercentTwo = Double(tipSetting.tipTwo)/100.0
         var tipPercentThree = Double(tipSetting.tipThree)/100.0
@@ -134,8 +140,6 @@ class ViewController: UIViewController {
         total = billAmount + tip
         lbTip.text = numberFormatter.stringFromNumber(tip)
         lbTotal.text = numberFormatter.stringFromNumber(total)
-        
-        
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
