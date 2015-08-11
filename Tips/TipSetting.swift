@@ -12,5 +12,6 @@ class TipSetting: NSObject{
     var tipOne: Int!
     var tipTwo: Int!
     var tipThree: Int!
+    var curIdx = 0
     var hasBackground = false
 }

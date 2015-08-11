@@ -19,6 +19,8 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var tipControl: UISegmentedControl!
     
+    
+    
     var numberFormatter : NSNumberFormatter!
     var tipSetting : TipSetting!
     var tip : Double = 0.0
@@ -59,7 +61,10 @@ class ViewController: UIViewController {
     func initTipControl() {
         tipControl.setTitle( String(tipSetting.tipOne) + "%", forSegmentAtIndex: 0)
         tipControl.setTitle( String(tipSetting.tipTwo) + "%", forSegmentAtIndex: 1)
-        tipControl.setTitle( String(tipSetting.tipThree) + "%", forSegmentAtIndex: 2)    }
+        tipControl.setTitle( String(tipSetting.tipThree) + "%", forSegmentAtIndex: 2)
+        tipControl.selectedSegmentIndex = tipSetting.curIdx
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -170,7 +175,7 @@ class ViewController: UIViewController {
     
     @IBAction func showSetting(sender: AnyObject) {
         
-        
+        tipSetting.curIdx = tipControl.selectedSegmentIndex;
         self.performSegueWithIdentifier("goSetting", sender: tipSetting )
         
     }

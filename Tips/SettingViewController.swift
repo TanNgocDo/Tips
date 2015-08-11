@@ -21,6 +21,9 @@ class SettingViewController: UIViewController,UITextFieldDelegate {
     
     @IBOutlet weak var swBackground: UISwitch!
     
+    
+    @IBOutlet weak var tipControl: UISegmentedControl!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,10 +35,26 @@ class SettingViewController: UIViewController,UITextFieldDelegate {
         txtTipTwo.text = String(tipSetting.tipTwo)
         txtTipThree.text = String(tipSetting.tipThree)
         
-        swBackground.on = tipSetting.hasBackground
+     //   swBackground.on = tipSetting.hasBackground
+        
+     //   tipControl.selectedSegmentIndex = tipSetting.curIdx
         
         
           }
+    func initTipControl() {
+        tipControl.selectedSegmentIndex = tipSetting.curIdx
+        tipControl.setTitle( String(tipSetting.tipOne) + "%", forSegmentAtIndex: 0)
+        tipControl.setTitle( String(tipSetting.tipTwo) + "%", forSegmentAtIndex: 1)
+        tipControl.setTitle( String(tipSetting.tipThree) + "%", forSegmentAtIndex: 2)    }
+    
+    override func viewWillAppear(animated: Bool) {
+        
+        swBackground.on = tipSetting.hasBackground
+        self.initTipControl()
+        
+        
+        
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -69,15 +88,17 @@ class SettingViewController: UIViewController,UITextFieldDelegate {
 //        if( !txtTipOne.text.isEmpty ) {
 //        tipSetting.tipOne = txtTipOne.text.toInt()
 //        }
+        tipControl.setTitle( String(txtTipOne.text) + "%", forSegmentAtIndex: 0)
     }
     
     
     @IBAction func onTipTwoChange(sender: AnyObject) {
        // tipSetting.tipTwo = txtTipTwo.text.toInt()
+        tipControl.setTitle( String(txtTipTwo.text) + "%", forSegmentAtIndex: 1)
     }
     
     @IBAction func onTipThreeChanged(sender: AnyObject) {
-      //  tipSetting.tipThree = txtTipThree.text.toInt()
+      tipControl.setTitle( String(txtTipThree.text) + "%", forSegmentAtIndex: 2)
     }
     
     
@@ -103,6 +124,7 @@ class SettingViewController: UIViewController,UITextFieldDelegate {
         }
         
         tipSetting.hasBackground = swBackground.on
+        tipSetting.curIdx = tipControl.selectedSegmentIndex
         
     }
     
