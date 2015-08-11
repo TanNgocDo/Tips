@@ -25,6 +25,6 @@ Completed:
 
 Video Walkthrough
 
-![alt tag](https://cloud.githubusercontent.com/assets/8816061/9176972/9bb04e90-3fb8-11e5-9381-4bb0610cb63f.gif)
+![alt tag](https://cloud.githubusercontent.com/assets/8816061/9203754/2cd82792-4083-11e5-80a4-8591df57ab6c.gif)
 
 
